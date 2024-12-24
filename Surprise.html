@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Trip for Touta! ❤️</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-color: #2b6cb0;
+            --secondary-color: #4299e1;
+            --accent-color: #f6ad55;
+            --background-color: #f7fafc;
+            --text-color: #2d3748;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: white;
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 20px 0;
+        }
+
+        .teaser {
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+
+        .hint-wrapper {
+            margin: 20px 0;
+        }
+
+        .hint-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            user-select: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.2);
+        }
+
+        .hint-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.3);
+        }
+
+        .hint-content {
+            background: white;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: none;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .hint-content.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .day {
+            padding: 20px 0;
+            margin: 30px 0;
+            position: relative;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .activity {
+            margin: 20px 0;
+            padding: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .activity:hover {
+            transform: translateX(5px);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+        }
+
+        .details {
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px 0;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .emoji-icon {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Surprise Trip for Touta! ❤️</h1>
+        
+        <div class="teaser">
+            <h2>Can You Guess Where We're Going?</h2>
+            <div class="hint-wrapper">
+                <div class="hint-button">
+                    🍖 Tap to Reveal Hint 1!
+                </div>
+                <div class="hint-content">
+                    This city is famous for its delicious non halal food.
+                </div>
+            </div>
+            <div class="hint-wrapper">
+                <div class="hint-button">
+                    🎨 Tap to Reveal Hint 2!
+                </div>
+                <div class="hint-content">
+                    The place/activity is on high demand in tourism.
+                </div>
+            </div>
+            <div class="hint-wrapper">
+                <div class="hint-button">
+                    🏰 Tap to Reveal Hint 3!
+                </div>
+                <div class="hint-content">
+                    The city has some unique masterpieces of architecture.
+                </div>
+            </div>
+            <div class="hint-wrapper">
+                <div class="hint-button">
+                    ⛰️ Tap to Reveal Hint 4!
+                </div>
+                <div class="hint-content">
+                    One of our activities involves a mountain hike.
+                </div>
+            </div>
+            <div class="hint-wrapper">
+                <div class="hint-button">
+                    🏨 Tap to Reveal Hint 5!
+                </div>
+                <div class="hint-content">
+                    We will stay in a charming boutique in the heart of the city launched in 1898.
+                </div>
+            </div>
+            <p style="text-align: center; font-style: italic;">Where are we headed?</p>
+            <div class="reveal-wrapper" style="text-align: center; margin-top: 30px;">
+                <button id="reveal-button" class="hint-button" style="background: linear-gradient(135deg, #f6ad55, #ed8936); font-size: 1.2em; padding: 20px 40px;">
+                    🥁 Reveal the Destination! 🎉
+                </button>
+                <div id="destination-reveal" style="display: none; margin-top: 30px;">
+                    <h1 style="font-size: 3em; margin: 20px 0; opacity: 0; transform: scale(0.5); transition: all 0.5s ease-out;" id="reveal-text">
+                        ✨ BARCELONA! ✨
+                    </h1>
+                </div>
+            </div></p>
+        </div>
+
+        <h2>🕐 Our Itinerary</h2>
+
+        <div class="day">
+            <h3>⭐ December 25, 2024</h3>
+            <div class="activity">
+                <p>✈️ <strong>Flight:</strong> Depart from Amsterdam (AMS) at 8:55 PM and arrive in Barcelona (BCN) at 11:05 PM on flight KL 1521.</p>
+            </div>
+            <div class="activity">
+                <p>🏨 <strong>Check-In:</strong> Hotel 1898</p>
+                <img src="https://tophotels.com/data/Photos/1080x700/8329/832955/832955354/Hotel-1898-Barcelona-Exterior.JPEG" alt="Hotel 1898" />
+                <p><em>"Listed as the best 4 star hotel in the city located on La Rambla, featuring an indoor pool and sauna AAAA."</em></p>
+                <div class="image-container">
+                    <img src="https://assets.tripsmiths.com/images/square/395247-spa-hotel-1898.jpg" alt="Sauna">
+                    <img src="https://content.tui.co.uk/adamtui/2017_5/4_9/1e676e28-e03c-4f9b-bba0-a769009a12c2/ACC_090015_BAR_01WebOriginalCompressed.jpg?i10c" alt="Indoor Pool">
+                </div>
+            </div>
+        </div>
+
+        <div class="day">
+            <h3>☀️ Day 1: December 26, 2024</h3>
+            <div class="activity">
+                🏛️ <strong>Morning:</strong> Guided tour of Sagrada Familia (9:00 AM - 10:30 AM)</p>
+                <img src="https://cdn.britannica.com/15/194815-050-08B5E7D1/Nativity-facade-Sagrada-Familia-cathedral-Barcelona-Spain.jpg" alt="Sagrada Familia" />
+                <p><em>Location: Carrer de Mallorca, 416, 08013 Barcelona, Spain</em></p>
+            </div>
+            <div class="activity">
+                <p>🍷 <strong>Evening:</strong> Casa Ballo night exprience.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Casa_Batllo_Overview_Barcelona_Spain_cut.jpg/640px-Casa_Batllo_Overview_Barcelona_Spain_cut.jpg" alt="Casa Ballo" />
+            </div>
+        </div>
+
+        <div class="day">
+            <h3>⭐ Day 2: December 27, 2024</h3>
+            <div class="activity">
+                <p>☕ <strong>Early Breakfast:</strong> Breakfast at the hotel
+                </p><p>
+                <div class="activity">
+                    <p>🌳 <strong>Afternoon:</strong> Visit Park Güell with Amigo Tours</p>
+                    <img src="https://cdn-imgix.headout.com/media/images/3e5f61c966be04ede4094955fbae3759-Park%20Guell%20.jpg?auto=format&w=1222.3999999999999&h=687.6&q=90&fit=crop&ar=16%3A9&crop=faces" alt="Park Güell" />
+                </div>
+                <p><em>Meeting Point: Av. del Marqués de l'Argentera, 6, Barcelona, 08003, ES</em></p>
+            </div>
+        </div>
+    
+        <div class="day">
+            <h3>🌙 Day 3: December 28, 2024</h3>
+            <div class="activity">
+                <p>⛰️ <strong>Morning to Afternoon:</strong> Explore Montserrat Mountain with Amigo Tours (8:00 AM - 1:00 PM)</p>
+                <img src="https://cdn-imgix.headout.com/media/images/2aa28d10dc63358e097d0f8d47f2b1b6-Barcelona%20Montserrat%20Aerial%20View.jpg?auto=format&w=1222.3999999999999&h=687.6&q=90&fit=crop&ar=16%3A9&crop=faces" alt="Montserrat Mountain" />
+                <p><em>Meeting Point: Av. del Marqués de l'Argentera, 6, Barcelona, 08003, ES</em></p>
+            </div>
+            <div class="activity">
+                <p>🌆 <strong>Evening:</strong> Rest in the Hotel. The hike must have been a nightmare.</p>
+            </div>
+        </div>
+    
+        <div class="day">
+            <h3>🗺️ Day 4: December 29, 2024</h3>
+            <div class="activity">
+                <p>⛰️ <strong>Morning to Afternoon:</strong> Spain - Andorra - France</p>
+                <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/10/46/dc/bd.jpg" alt="Andorra" />
+                <p><em>Meeting Point: Av. del Marqués de l'Argentera, 6, Barcelona, 08003, ES</em></p>
+            </div>
+        </div>
+
+        <div class="day">
+            <h3>🍃 Day 5-6: December 30/31, 2024</h3>
+            <div class="activity">
+                <p>☕ <strong>Chillax:</strong> Enjoy breakfast and leisure time at Hotel 1898.</p>
+            </div>
+            <div class="activity">
+                <p>✈️ <strong>Go back home:</strong> Flight back to Amsterdam (AMS) at 7:55 PM on flight KL 1520, arriving at 10:15 PM.</p>
+            </div>
+        </div>
+
+        <div class="details">
+            <h3>ℹ️ Details to Keep in Mind</h3>
+            <p>📍 <strong>Hotel Address:</strong> La Rambla, 109, 08002 Barcelona, Spain</p>
+            <p>🌤️ <strong>Weather Forecast:</strong> Sunny with mild temperatures, around 15°C (59°F) during the day.</p>
+            <p>⏰ <strong>Agency Time:</strong> We need to be at the location 30 min before.</p>
+            <p>🛣️ <strong>Itinerary:</strong></p>
+            <ul>
+                <li>Near the hotel
+                    <ul>
+                        <li>La Rambla street</li>
+                        <li>Placa Catalunya</li>
+                        <li>Casa Batlló (18 min)</li>
+                        <li>La Boqueria market</li>
+                        <li>Cathedral of Barcelona (8 min)</li>
+                        <li>Ciutadella Park (20 min)</li>
+                        <li>Plaça de Catalunya</li>
+                    </ul>
+                </li>
+                <li>Around 30 min by train or bus (same way)
+                    <ul>
+                        <li>Parc del Laberint d'Horta</li>
+                        <li>La Sagrada Familia</li>
+                        <li>Park Güell
+                            <ul>
+                                <li>When in Parc Güell, go eat the Portuguese dessert</li>
+                                <li>See Casa Vicens Gaudí</li>
+                                <li>Maybe Recinte Modernista de Sant Pau</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Not the same way
+                    <ul>
+                        <li>Museum Nacional d'Art de Catalunya and fountain</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>🍔 <strong>Food:</strong>
+                <ul>
+                    <li>Restaurants and coffee shops:
+                        <ul>
+                            <li>La Pallaresa for Hot chocolate</li>
+                            <li>A Casa Portuguesa for pastel de nata</li>
+                        </ul>
+                    </li>
+                    <li>Don’t forget to eat:
+                        <ul>
+                            <li>Churros</li>
+                            <li>Melindro</li>
+                            <li>Crema Catalana</li>
+                            <li>Escalivada</li>
+                            <li>Calçots amb romesco</li>
+                            <li>Esquiexada</li>
+                            <li>Tortilla De Patatas</li>
+                            <li>Patatas Bravas</li>
+                            <li>Pà Amb Tomàquet</li>
+                            <li>Seafood Paella</li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+
+        <div class="final-message">
+            <h3>❤️ Ready for Our Adventure?</h3>
+            <p>This trip is all about us making unforgettable memories together. Can't wait to experience it with you! ❤️</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Hint buttons functionality
+        document.querySelectorAll('.hint-button').forEach(button => {
+            if (button.id !== 'reveal-button') {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    content.classList.toggle('show');
+                    
+                    if (content.classList.contains('show')) {
+                        button.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
+                        button.innerHTML = button.innerHTML.replace('Tap to Reveal', 'Revealed');
+                    } else {
+                        button.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
+                        button.innerHTML = button.innerHTML.replace('Revealed', 'Tap to Reveal');
+                    }
+                });
+            }
+        });
+
+        // Confetti animation
+        function fireConfetti() {
+            const duration = 3000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                // Left side confetti
+                confetti(Object.assign({}, defaults, { 
+                    particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#f6ad55', '#ed8936', '#2b6cb0', '#4299e1']
+                }));
+                // Right side confetti
+                confetti(Object.assign({}, defaults, { 
+                    particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#f6ad55', '#ed8936', '#2b6cb0', '#4299e1']
+                }));
+            }, 250);
+        }
+
+        function revealDestination() {
+            const revealText = document.getElementById('reveal-text');
+            revealText.style.opacity = '1';
+            revealText.style.transform = 'scale(1)';
+            fireConfetti();
+        }
+
+        document.getElementById('reveal-button').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.getElementById('destination-reveal').style.display = 'block';
+            setTimeout(revealDestination, 100);
+            fireConfetti();
+        });
+    </script>
+</body>
+</html>
